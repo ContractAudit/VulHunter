@@ -17,4 +17,4 @@ The folder "Labels" shows the labels of contract vulnerabilities in Dataset_1. T
 
 ## Methods_detection
 
-The folder "Methods_detection" includes the detection results of each method. Among them, the file "dataset2_result_Mythril.rar" shows the detection result files, the file "Mythril_audit_files_results.json" shows the overall situation of the file audit, and the file "Mythril_files_holeloops.json" shows the summary results of the method audit vulnerabilities. In addition, the models in VulHunter are trained on Benign:Malicious=5:1 contracts in Dataset_1, and models of 2:1 are shown in the code folder.
+The folder "Methods_detection" includes the detection results of each method. Among them, the file "dataset1_result_2000_Mythril" shows the 2,000 detection result files, the file "Mythril_audit_files_results_dataset1.json" shows the overall situation of the file audit, and the file "Mythril_files_holeloops_dataset1.json" shows the summary results of the method audit vulnerabilities. In addition, the models in VulHunter are trained on Benign:Malicious=5:1 contracts in Dataset_1, and models of 2:1 are shown in the code folder.
