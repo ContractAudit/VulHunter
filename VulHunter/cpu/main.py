@@ -44,6 +44,7 @@ import torch.nn.functional as F
 
 import result_predict
 import bytecodes_construction
+from report_english import ReportEnglish
 
 class NpEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -82,3 +83,17 @@ if __name__ == '__main__':
     print(predict_results)
 
     print("time overhead: {} {}, all: {}".format(time_instance-time_begin, time_predict-time_instance, time_predict-time_begin))
+
+    time_start = time.localtime()
+    auditid = ""
+    auditid = auditid + time.strftime("%m%d%H%M%S", time_start)
+    auditid = auditid + str(random.randint(1000,9999))    
+    filename = filepath.split('/')[-1]
+
+    bytecodes = bytecodes_lists[0]
+
+    report_path = '../Revolution__2_eng.pdf'
+
+    rep = ReportEnglish()
+    rep._output(predict_results, filename, time_start, auditcontent, report_path, contracts_names, auditid, bytecodes)
+    rep._output_main(predict_results, filename, time_start, auditcontent, report_path, contracts_names, auditid, bytecodes)

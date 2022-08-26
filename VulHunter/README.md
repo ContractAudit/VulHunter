@@ -1,7 +1,10 @@
 # VulHunter, an detection method based on multi-instance learning and machine learning for Ethereum smart contracts
-<img src="./overviewer.png" alt="Logo" width="1100"/>
+
+<img src="./logo.png" alt="Logo" align="left" width="350"/>
 
 VulHunter is a method that can effectively detect bytecode/opcode paths that trigger vulnerabilities without manual pre-defined patterns. It employs multi-instance learning (MIL) and Bag-instance/self-model attentions based Bi-directional Long Short-Term Memory (Bi$^2$-LSTM) model to inspect the execution path of contract bytecode. It is written in Python 3 with12K lines of code. Furthermore, It can detect contract vulnerabilities more accurately, efficiently, and robustly than the SOTA methods. More importantly, it can produce classification results while providing the vulnerable runtime execution sequences, which can benefit the secondary validation and vulnerability repair. 
+
+<img src="./overviewer.png" alt="Logo" width="1100"/>
 
 - [Bugs and Optimizationimizations Detection](#bugs-and-Optimizationimizations-detection)
 - [How to Install](#how-to-install)
