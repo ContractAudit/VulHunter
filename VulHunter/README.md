@@ -17,20 +17,50 @@ Run VulHunter on a Truffle/Embark/Dapp/Etherlime application:
 python main.py
 ```
 
-Run VulHunter on a single file:
+Run VulHunter with the Bi$^2$-LSTM model on a single file:
 ```bash
-python main.py test BitsForAI.sol
+python main.py test Bi2LSTM BitsForAI.sol
 ```
 
-Run VulHunter and output the results to a json file:
+Run VulHunter with the Bi$^2$-LSTM model and output the results to a json file:
 ```bash
-python main.py test BitsForAI.sol --json BitsForAI.json
+python main.py test Bi2LSTM BitsForAI.sol --json BitsForAI.json
+```
+
+Run VulHunter with the Bi$^2$-LSTM model and output the result report without defective source code statements:
+
+```bash
+python main.py test Bi2LSTM BitsForAI.sol --report --nomap BitsForAI-nomap.pdf
+```
+
+Run VulHunter with the Bi$^2$-LSTM model and output the result report with defective source code statements:
+
+```bash
+python main.py test Bi2LSTM BitsForAI.sol --report --map BitsForAI-map.pdf
+```
+
+Run VulHunter with the Bi$^2$-LSTM model and output the main result report without defective source code statements:
+
+```bash
+python main.py test Bi2LSTM BitsForAI.sol --report-main --nomap BitsForAI-main-nomap.pdf
+```
+
+Run VulHunter with the Bi$^2$-LSTM model and output the main result report with defective source code statements:
+
+```bash
+python main.py test Bi2LSTM BitsForAI.sol --report-main --map BitsForAI-main-map.pdf
 ```
 
 Run VulHunter and train the Bi$^2$-LSTM model:
 
 ```bash
-python main.py train train_dataset_dir models_dir
+python main.py train Bi2LSTM train_dataset_dir models_dir
+```
+
+Run VulHunter and train the other model:
+
+```bash
+python main.py train other_model_name train_dataset_dir models_dir
 ```
 
 Employ solc with mutiple Solidity version such as 0.4.24 to compile source code into bytecode, and utilise pyevmasm 0.2.3 based on EVM to disassemble the bytecode to its opcode.

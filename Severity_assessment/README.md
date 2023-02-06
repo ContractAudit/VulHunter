@@ -1,6 +1,6 @@
 # The details of contract vulnerability severity assessment
 
-Combined with CVSS2.0 (Common Vulnerability Scoring System), the vulnerability severity of smart contract can be rated as *High*, *Medium*, *Low*, *Informational* (*Info*), and *Optimization* (*Opt*) in terms of risk degrees and utilization difficulties.
+Combined with CVSS2.0 (Common Vulnerability Scoring System), the severity of smart contract vulnerabilities (refer to contract bugs and code optimizations) can be rated as *High*, *Medium*, *Low*, *Informational* (*Info*), and *Optimization* (*Opt*) in terms of risk degrees and utilization difficulties. 
 
 <img src=".\vulnerability_rating.png" style="text-align: center; zoom:50%;" />
 
@@ -18,11 +18,24 @@ The risk degree refers to the impact of vulnerability on the resources such as b
 
 ## Utilization difficulties
 
-The utilization difficulty refers to the possibility of vulnerability occurrence. According to the three dimensions of attack cost (e.g., money, time, and technology), utilization condition (i.e., the difficulty of attack utilization), and trigger probability (e.g., vulnerabilities can only be triggered by a few users), this paper divides it into *exactly*, *probably*} and *possibly*. Generally, *exactly* utilization requires an inferior cost, and the vulnerabilities can be stably triggered without a special threshold. Including but not limited to: (i) easy to invoke; (ii) need few costs; (iii) hold few assets.
+The utilization difficulty refers to the possibility of vulnerability occurrence. According to the three dimensions of attack cost (e.g., money, time, and technology), utilization condition (i.e., the difficulty of attack utilization), and trigger probability (e.g., vulnerabilities can only be triggered by a few users), this paper divides it into *exactly*, *probably* and *possibly*. Generally, *exactly* utilization requires an inferior cost, and the vulnerabilities can be stably triggered without a special threshold. Including but not limited to: (i) easy to invoke; (ii) need few costs; (iii) hold few assets.
 
 *Probably* utilization requires a certain cost and utilization conditions, and the vulnerabilities are not easy to trigger. Including but not limited to: (i) pay a certain cost but less than attack proceeds; (ii) require attackers to achieve certain normal conditions, such as collusion with miners or outbound nodes; (iii) cooperate with known attacks in smart contracts, such as attacking other on-chain Oracle contracts.
 
 *Possibly* utilization requires expensive costs and strict utilization conditions, and the vulnerabilities are more difficult to trigger. Including but not limited to: (i) pay the cost that more than the attack proceeds; (ii) require the attackers to meet low-frequency conditions, such as belonging to a few critical accounts, and constructing a difficult specific signature.
+
+## Comparison with custom severity assessment methods
+
+Currently, there are some evaluation schemes for contract vulnerability severity, such as Securify2.0 [1], DefectChecker [2], Slither [3], SmartCheck [4], etc. Among them, Securify2.0 divided the vulnerability severity into five levels (Critical, High, Medium, Low, and Info), and investigated the vulnerabilities from the SWC vulnerability database. SmartCheck divided it into three levels (High, Medium, and Low). Note that they are a preliminary attempt to assess contract vulnerabilities, which set a precedent. However, on the one hand, they lack the details of the assessment principles and the difference between the severity. On the other hand, from the developer's perspective, the severity should reflect the contract security comprehensively and directly, i.e., reporting the type of vulnerabilities, reminders, and optimization. This can help developers to optimize the contract more intuitively. 
+
+To this end, DefectChecker considered the severity from three aspects of unwanted behavior (critical, major, trivial), attack vector (triggered by external, stolen ethers), usability (potential errors for callers, gas waste, mistakes on code reuse), and divided it into 5 levels of IP1-5. IP1 is the highest, and IP5 is the lowest. Contract defects with impact level 1-2 can lead to critical unwanted behaviors, like crashing or a contract being controlled by attackers. Contract defects with impact level 3 can lead to major unwanted behaviors, like lost ethers. Impact level 4-5 can lead to trivial problems, e.g., low readability, which would not affect the normal running of the contract. The mechanism details the evaluation basis and the distinction between the severity. Nonetheless, they still ignored the definition of optimization type. 
+
+Recently, Slither has classified contract severity into High, Medium, Low, Informational, and Optimization from impact (High, Medium, Low, Informational, Optimization) and confidence (High, Medium, Low), which is consistent with our consideration. However, they lack the introduction of the evaluation details and judgment criteria. Overall, these mechanisms are formulated with their own considerations. Similar to them, we are working to find a suitable evaluation model that can describe the contract vulnerabilities precisely and obviously, thereby allowing contract developers or auditors to understand the contract security. Of course, this evaluation mechanism may not be perfect, yet it can give others some inspiration, enabling them to improve and propose a better method.
+
+- [1] [Securify v2.0.](https://github.com/eth-sri/securify2) [EB/OL], SRI Lab, ETH Zurich, 20
+- [2] [DefectChecker: Automated Smart Contract Defect Detection by Analyzing EVM Bytecode](https://ieeexplore.ieee.org/document/9337195), Jiachi Chen, Xin Xia, David Lo, John Grundy, Xiapu Luo, Ting Chena, Yujia Chen - IEEE TSE '20
+- [3] [Slither: A Static Analysis Framework For Smart Contracts](https://arxiv.org/abs/1908.09878), Josselin Feist, Gustavo Grieco, Alex Groce - WETSEB '19
+- [4] [SmartCheck: Static Analysis of Ethereum Smart Contracts](https://orbilu.uni.lu/bitstream/10993/35862/3/smartcheck-paper.pdf), Sergei Tikhomirov, Ekaterina Voskresenskaya, Ivan Ivanitskiy, Ramil Takhaviev, Evgeny Marchenko, Yaroslav Alexandrov - WETSEB '18
 
 ## Motivation examples
 

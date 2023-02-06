@@ -11,9 +11,9 @@ The folder "Detection_result" describes the detection result of each method in d
 
 The folder "Extracted_instances" shows the instances extracted by VulHunter.
 
-## Examples_result
+## Example_results
 
-The folder "Examples_result" shows the detection result of each method for contract examples involved in the paper.
+The folder "Example_results" shows the detection result of each method for contract examples involved in the paper.
 
 ## Methods_detection
 
