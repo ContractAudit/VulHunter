@@ -29,7 +29,7 @@ The above figures visualize the weight distribution of arbitrary-send detector f
 
 In order to validate the feasibility of this defective instance, we used Z3, Yices, and CVC4 as the verifiers of the constraint-solving module and employed them to solve the constraints constructed based on the instance. The verification results are shown in the below figures, and they all indicate that the vulnerable instance is feasible. Therefore, the CIN contract holds the arbitrary-send vulnerability.
 
-<center><img src="Document_figures/clip_image010.jpg" alt="img" style="zoom:100%;" /> <img src="Document_figures/clip_image012.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010.jpg" alt="img" style="zoom:100%;" /> <img src="Document_figures/clip_image012.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014.jpg)
 
@@ -49,7 +49,7 @@ Specifically, as shown in the above figure, the statement if-false introduces al
 
 In order to eliminate this false positive, we employ the symbolic-solving module to construct and solve the constraints of vulnerable instances, similar to the above verification of the CIN contract. As shown in the below figures, all solvers indicated that this vulnerable instance is infeasible, thus correcting the detection results.
 
-<center><img src="Document_figures/clip_image010-168526534205933.jpg" alt="img" style="zoom:100%;" /> <img src="Document_figures/clip_image012-168526534205934.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-168526534205933.jpg" alt="img" style="zoom:100%;" /> <img src="Document_figures/clip_image012-168526534205934.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-168526534205935.jpg)
 
@@ -69,7 +69,7 @@ Due to the almost the same paths and only one different opcode 0x0 (False) and 0
 
 In order to validate the feasibility of this defective instance, we also employed the symbolic-solving module to solve the constraints constructed based on vulnerable instances. The verification results are shown in the below figures, and all solvers indicated that the vulnerable instance is feasible. Therefore, the CIN_ITrue contract holds the arbitrary-send vulnerability.
 
-<center><img src="Document_figures/clip_image010-168526537781940.jpg" alt="img" style="zoom:100%;" /> <img src="Document_figures/clip_image012-168526537781941.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-168526537781940.jpg" alt="img" style="zoom:100%;" /> <img src="Document_figures/clip_image012-168526537781941.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-168526537781942.jpg)
 
@@ -89,11 +89,11 @@ Specifically, as shown in the above figure, VulHunter discovered two vulnerable 
 
 In order to eliminate these two false positives, we employ the symbolic-solving module to solve the constraints of vulnerable instances. As shown in the below figures, all solvers indicated that both vulnerable instances are infeasible, thus correcting the detection results.
 
-<center><img src="Document_figures/clip_image010-168526541023547.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526541023548.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-168526541023547.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526541023548.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-168526541023549.jpg)
 
-<center><img src="Document_figures/clip_image016.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image018.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image016.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image018.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image020.jpg)
 
@@ -113,11 +113,11 @@ Due to the almost the same paths and only one different opcode LT (Less-than) an
 
 In order to validate the feasibility of these defective instances, we also employed the symbolic-solving module to solve the constraints constructed based on vulnerable instances. The verification results are shown in the below figures, and all solvers indicated that the vulnerable instance is feasible. Therefore, the CIN_IOTrue contract holds the arbitrary-send vulnerability.
 
-<center><img src="Document_figures/clip_image010-168526543405254.jpg" alt="img" style="zoom:100%;" /> <img src="Document_figures/clip_image012-168526543405256.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-168526543405254.jpg" alt="img" style="zoom:100%;" /> <img src="Document_figures/clip_image012-168526543405256.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-168526543405255.jpg)
 
-<center><img src="Document_figures/clip_image016-168526543405257.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image018-168526543405258.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image016-168526543405257.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image018-168526543405258.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image020-168526543405359.jpg)
 
@@ -137,7 +137,7 @@ Similar to the CIN_IFalse contract, the statement assert-false also introduces a
 
 In order to eliminate this false positive, we also employ the symbolic-solving module to solve the constraints of vulnerable instances. As shown in the below figures, all solvers indicated that this vulnerable instance is infeasible, thus correcting the detection results.
 
-<center><img src="Document_figures/clip_image010-168526545396264.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526545396265.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-168526545396264.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526545396265.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-168526545396266.jpg)
 
@@ -157,7 +157,7 @@ Due to the almost the same paths and only one different opcode 0x0 (False) and 0
 
 In order to validate the feasibility of this defective instance, we also employed the symbolic-solving module to solve the constraints constructed based on vulnerable instances. The verification results are shown in the below figures, and all solvers indicated that the vulnerable instance is feasible. Therefore, the CIN_ATrue contract holds the arbitrary-send vulnerability.
 
-<center><img src="Document_figures/clip_image010-168526547395671.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526547395672.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-168526547395671.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526547395672.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-168526547395673.jpg)
 
@@ -177,7 +177,7 @@ As shown in the above figure, VulHunter detected the first instance holds the fe
 
 In order to eliminate this misreport, we employ the symbolic-solving module to solve the constraints of the vulnerable instance. As shown in the below figures, all solvers indicated that it is an infeasible path, thus correcting its detection result to benign.
 
-<center><img src="Document_figures/clip_image010-168526549535278.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526549535280.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-168526549535278.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526549535280.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-168526549535279.jpg)
 
@@ -197,7 +197,7 @@ Similar to the detection for the CIN_IOTrue contract, the different computations
 
 In order to validate the feasibility of these defective instances, we also employed the symbolic-solving module to solve the constraints constructed based on vulnerable instances. The verification results are shown in the below figures, and all solvers indicated that the vulnerable instance is feasible. Therefore, the CIN_AOTrue contract holds the arbitrary-send vulnerability.
 
-<center><img src="Document_figures/clip_image010-168526551303485.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526551303486.jpg" alt="img" style="zoom:100%;" /><center>
+<div><img src="Document_figures/clip_image010-168526551303485.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526551303486.jpg" alt="img" style="zoom:100%;" /><div>
 
 ![img](Document_figures/clip_image014-168526551303487.jpg)
 
@@ -211,9 +211,9 @@ The integer-overflow vulnerability means that numeric operations on variables ma
 
 As shown in the above figure, VulHunter identified the fifth instance that holds the features of integer-overflow and located the variable operation with 87.52% of confidence. In order to validate the feasibility of the vulnerable execution paths and obtain their invoking inputs, we used Z3, Yices, and CVC4 as the verifiers of the constraint-solving module and employed them to solve the constraints constructed based on the execution paths. The validation results are shown in the below figures, and all solvers indicate that the constraints can be satisfied with the inputs “x=2147483643” and “y=1073741851”.
 
-<center><img src="Document_figures/clip_image008-168526553117790.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image010-168526553118091.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image008-168526553117790.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image010-168526553118091.jpg" alt="img" style="zoom:100%;" /></div>
 
-<center><img src="Document_figures/clip_image012-168526553118092.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image014-168526553118093.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image012-168526553118092.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image014-168526553118093.jpg" alt="img" style="zoom:100%;" /></div>
 
 Therefore, on the one hand, the symbolic-solving module can verify the feasibility of the vulnerability paths by determining whether their constraints can be solved. On the other hand, as mentioned in Section 4.9 of the paper, it makes methods such as VulHunter and Oyente hold more capabilities, e.g., obtaining the inputs that restore the vulnerable execution paths to trigger the vulnerability. For this contract, attackers can invoke the “bad” function with the above solved inputs to cause numerical overflow and get unexpected results, i.e., earning ether benefits. 
 
@@ -233,7 +233,7 @@ As shown in the above figure, VulHunter detects the second instance holds the fe
 
 In order to validate the feasibility of this defective instance, we employed the symbolic-solving module to solve the constraints constructed based on the instance. The verification results are shown in the below figures, and all solvers indicate that the vulnerable instance is feasible. Therefore, the ARP contract holds the reentrancy-eth vulnerability.
 
-<center><img src="Document_figures/clip_image010-168526554977596.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526554977697.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-168526554977596.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-168526554977697.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-168526554977698.jpg)
 
@@ -253,7 +253,7 @@ Due to the statement if-false introducing almost little difference at the instan
 
 In order to eliminate this false positive, we employ the symbolic-solving module to solve the constraints based on the vulnerable instance. As shown in the below figures, all solvers indicated that this vulnerable instance is infeasible, thus correcting the false positive.
 
-<center><img src="Document_figures/clip_image010-1685265570146103.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-1685265570147104.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-1685265570146103.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-1685265570147104.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-1685265570147105.jpg)
 
@@ -273,11 +273,11 @@ As shown in the above figure, VulHunter detects the second and third instances t
 
 In order to validate the feasibility of these defective instances, we employed the symbolic-solving module to solve the constraints constructed based on the instances. The verification results are shown in the below figures, and all solvers indicate that both defective instances are feasible. Therefore, the Cloud contract holds the block-other-parameters defect.
 
-<center><img src="Document_figures/clip_image010-1685265588644110.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-1685265588644111.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-1685265588644110.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-1685265588644111.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014.gif)
 
-<center><img src="Document_figures/clip_image016-1685265588644112.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image018-1685265588644113.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image016-1685265588644112.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image018-1685265588644113.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image020-1685265588644114.jpg)
 
@@ -297,11 +297,11 @@ Similar to the Cloud contract, VulHunter still located the defective source code
 
 In order to eliminate these false positives, we employ the symbolic-solving module to solve the constraints based on the defective instances. As shown in the below figures, all solvers indicated that these defective instances are infeasible, thus correcting the false positives.
 
-<center><img src="Document_figures/clip_image010-1685265608251119.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-1685265608251120.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image010-1685265608251119.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image012-1685265608251120.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image014-1685265608251121.jpg)
 
-<center><img src="Document_figures/clip_image016-1685265608252122.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image018-1685265608252123.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image016-1685265608252122.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image018-1685265608252123.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image020-1685265608252124.jpg)
 
@@ -367,7 +367,7 @@ As shown in the above figure, VulHunter detects the fourth instance that holds t
 
 In order to validate the feasibility of this defective instance, we employed the symbolic-solving module to solve the constraints constructed based on the instance. The verification results are shown in the below figures, and all solvers indicate that the defective instance is feasible. Therefore, the Caller contract holds the send-transfer optimization.
 
-<center><img src="Document_figures/clip_image011.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image013.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image011.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image013.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image015.jpg)
 
@@ -391,11 +391,11 @@ Similar to the AEther contract, VulHunter still located the defective source cod
 
 In order to eliminate these false positives, we employ the symbolic-solving module to solve the constraints based on the defective instances. As shown in the below figures, all solvers indicated that these defective instances are infeasible, thus correcting the false positives.
 
-<center><img src="Document_figures/clip_image014-1685265698862149.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image016-1685265698862150.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image014-1685265698862149.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image016-1685265698862150.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image018-1685265698863151.jpg)
 
-<center><img src="Document_figures/clip_image020-1685265698866152.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image022.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image020-1685265698866152.jpg" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image022.jpg" alt="img" style="zoom:100%;" /></div>
 
 ![img](Document_figures/clip_image024.jpg)
 

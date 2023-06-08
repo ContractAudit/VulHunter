@@ -127,7 +127,7 @@ The runtime bytecode compiled by Solc v0.4.24 for this contract is shown in the 
 
 The visualization results of the three tools are shown in the figure below, followed by VulHunter, EtherSolve, and ILF. It can be seen that the CFG reconstruction results of three tools are consistent.
 
-<div><img src="Document_figures\clip_image002.gif" alt="img" style="zoom:100%;" /><img src="Document_figures\clip_image004.gif" alt="img" style="zoom:100%;" /><img src="Document_figures\clip_image006.jpg" alt="img" style="zoom:100%;" /></div>
+<div><img src="Visualization\toy\dot\Test.png" alt="img" width="300" /><img src="Visualization\toy\dot\Test-ether.png" alt="img" width="300" /><img src="Visualization\toy\dot\Test-ILF.gv.svg" alt="img" width="300" /></div>
 
 2. The visual example of StandardToken contract.
 
@@ -141,7 +141,7 @@ The runtime bytecode compiled by Solc v0.4.24 for this contract is shown in the 
 
 The visualization results of the three tools are shown in the figure below, also followed by VulHunter, EtherSolve, and ILF. It can be seen that the CFG reconstruction results of three tools are consistent.
 
-<div><img src="Document_figures/clip_image002-16852555308281.gif" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image004-16852555308292.gif" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image006-16852555308313.jpg" alt="img" style="zoom:100%;" /></div>
+<div><img src="Visualization\reentrancy_eth\dot\reentrancy.png" alt="img" width="300" /><img src="Visualization\reentrancy_eth\dot\reentrancy-ether.png" alt="img" width="300" /><img src="Visualization\reentrancy_eth\dot\reentrancy-ILF.gv.svg" alt="img" width="300" /></div>
 
 > In conclusion, similar to the SOTA contract analysis methods, VulHunter is committed to implementing each module of the prototype more accurately, completely, and efficiently based on the advanced libraries, e.g., evm_cfg_builder [evm_cfg_builder] for CFG construction and pyevmasm [pyevmasm] for bytecode-opcode conversion. These libraries have been wildly used in methods of top conference and journal papers, as well as large engineering projects or products. This is beneficial to demonstrate the rationality, recognition, and advancement of VulHunter implementation. Also, the same visualization results with other SOTA CFG reconstruction tools can indirectly reflect the correctness of the implementation. Given the significance of CFG reconstruction and the decoupling nature of modules in the prototype, the attempts with these specialized tools inspire us to incorporate them into VulHunter for user selection. As CFG recovery technology evolves, this design may allow it to improve detection performance in the future by embracing more superior components.
 
