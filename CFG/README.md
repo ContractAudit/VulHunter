@@ -127,7 +127,7 @@ The runtime bytecode compiled by Solc v0.4.24 for this contract is shown in the 
 
 The visualization results of the three tools are shown in the figure below, followed by VulHunter, EtherSolve, and ILF. It can be seen that the CFG reconstruction results of three tools are consistent.
 
-<center><img src="Document_figures\clip_image002.gif" alt="img" style="zoom:100%;" /><img src="Document_figures\clip_image004.gif" alt="img" style="zoom:100%;" /><img src="Document_figures\clip_image006.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures\clip_image002.gif" alt="img" style="zoom:100%;" /><img src="Document_figures\clip_image004.gif" alt="img" style="zoom:100%;" /><img src="Document_figures\clip_image006.jpg" alt="img" style="zoom:100%;" /></div>
 
 2. The visual example of StandardToken contract.
 
@@ -141,7 +141,7 @@ The runtime bytecode compiled by Solc v0.4.24 for this contract is shown in the 
 
 The visualization results of the three tools are shown in the figure below, also followed by VulHunter, EtherSolve, and ILF. It can be seen that the CFG reconstruction results of three tools are consistent.
 
-<center><img src="Document_figures/clip_image002-16852555308281.gif" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image004-16852555308292.gif" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image006-16852555308313.jpg" alt="img" style="zoom:100%;" /></center>
+<div><img src="Document_figures/clip_image002-16852555308281.gif" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image004-16852555308292.gif" alt="img" style="zoom:100%;" /><img src="Document_figures/clip_image006-16852555308313.jpg" alt="img" style="zoom:100%;" /></div>
 
 > In conclusion, similar to the SOTA contract analysis methods, VulHunter is committed to implementing each module of the prototype more accurately, completely, and efficiently based on the advanced libraries, e.g., evm_cfg_builder [evm_cfg_builder] for CFG construction and pyevmasm [pyevmasm] for bytecode-opcode conversion. These libraries have been wildly used in methods of top conference and journal papers, as well as large engineering projects or products. This is beneficial to demonstrate the rationality, recognition, and advancement of VulHunter implementation. Also, the same visualization results with other SOTA CFG reconstruction tools can indirectly reflect the correctness of the implementation. Given the significance of CFG reconstruction and the decoupling nature of modules in the prototype, the attempts with these specialized tools inspire us to incorporate them into VulHunter for user selection. As CFG recovery technology evolves, this design may allow it to improve detection performance in the future by embracing more superior components.
 
@@ -149,10 +149,10 @@ The visualization results of the three tools are shown in the figure below, also
 
 As detailed above, VulHunter and other SOTA methods strive to reconstruct a sound and precise CFG. Nonetheless, it is necessary to consider the potential impact of an unsound or imprecise CFG on the method, given the challenges of the reconstruction of CFG, i.e., the computation of the jump destination. To this end, we simulate scenarios such as block loss (missed edge connections), block out-of-order (incorrect edge connections), and block repeat (abnormal loop operations) by deleting, replicating, and shuffling opcode sequences in the execution paths (i.e., instances). This allows us to quantify the relationship between vulnerability detection evaluation metrics and the imprecise instances or CFGs. Specifically, due to limitations in graph representation, we only present the variations of detection metrics for six representative vulnerabilities in each level (consistent with Tables 6, 7, and 13 in the paper) with changes in the degree of deletion (loss), replication (repeat), and shuffling (out-of-order). The experimental results are shown in the below figures.
 
-<center><img src="Experiment_figures\Loss_ACC.png" alt="Loss_ACC" style="zoom:6%;" /><img src="Experiment_figures\Repeat_ACC.png" alt="Repeat_ACC" style="zoom:6%;" /><img src="Experiment_figures\Out-of-order_ACC.png" alt="Out-of-order_ACC" style="zoom:6%;" /></center>
-<center><img src="Experiment_figures\Loss_P.png" alt="Loss_P" style="zoom:6%;" /><img src="Experiment_figures\Repeat_P.png" alt="Repeat_P" style="zoom:6%;" /><img src="Experiment_figures\Out-of-order_P.png" alt="Out-of-order_P" style="zoom:6%;" /></center>
-<center><img src="Experiment_figures\Loss_P.png" alt="Loss_P" style="zoom:6%;" /><img src="Experiment_figures\Repeat_R.png" alt="Repeat_R" style="zoom:6%;" /><img src="Experiment_figures\Out-of-order_R.png" alt="Out-of-order_R" style="zoom:6%;" /></center>
-<center><img src="Experiment_figures\Loss_ACC.png" alt="Loss_ACC" style="zoom:6%;" /><img src="Experiment_figures\Repeat_ACC.png" alt="Repeat_ACC" style="zoom:6%;" /><img src="Experiment_figures\Out-of-order_ACC.png" alt="Out-of-order_ACC" style="zoom:6%;" /></center>
+<div><img src="Experiment_figures\Loss_ACC.png" alt="Loss_ACC" style="zoom:6%;" /><img src="Experiment_figures\Repeat_ACC.png" alt="Repeat_ACC" style="zoom:6%;" /><img src="Experiment_figures\Out-of-order_ACC.png" alt="Out-of-order_ACC" style="zoom:6%;" /></div>
+<div><img src="Experiment_figures\Loss_P.png" alt="Loss_P" style="zoom:6%;" /><img src="Experiment_figures\Repeat_P.png" alt="Repeat_P" style="zoom:6%;" /><img src="Experiment_figures\Out-of-order_P.png" alt="Out-of-order_P" style="zoom:6%;" /></div>
+<div><img src="Experiment_figures\Loss_P.png" alt="Loss_P" style="zoom:6%;" /><img src="Experiment_figures\Repeat_R.png" alt="Repeat_R" style="zoom:6%;" /><img src="Experiment_figures\Out-of-order_R.png" alt="Out-of-order_R" style="zoom:6%;" /></div>
+<div><img src="Experiment_figures\Loss_ACC.png" alt="Loss_ACC" style="zoom:6%;" /><img src="Experiment_figures\Repeat_ACC.png" alt="Repeat_ACC" style="zoom:6%;" /><img src="Experiment_figures\Out-of-order_ACC.png" alt="Out-of-order_ACC" style="zoom:6%;" /></div>
 
 It can be seen that they reflect the following three facts.
 
