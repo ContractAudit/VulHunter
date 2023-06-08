@@ -5,7 +5,7 @@ The folder "Contracts" includes 183,710 Ethereum smart contract bytecodes in Dat
 
 ## Detection_result
 
-The folder "Detection_result" describes the detection result of each method on 10,000 sampled contracts.
+The folder "Detection_result" describes the detection result of each method on 10,000 sampled contracts. Also, it presents the detection result of all 183,710 contracts for VulHunter.
 
 ## Extracted_instances
 
