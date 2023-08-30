@@ -362,23 +362,24 @@ Seventh, as mentioned in Section 3.3, VulHunter leverages ML models and hybrid a
 
 ## References
 
->- [NDSS_DTMC] Chuanpu Fu, Qi Li, Ke Xu. Detecting Unknown Encrypted Malicious Traffic in Real Time via Flow Interaction Graph Analysis[C]//NDSS. The Internet Society. 2023.
->- [TIT_Inequality] Ram Zamir. A proof of the Fisher information inequality via a data processing argument[J]. IEEE Transactions on Information Theory, 1998, 44(3): 1246-1250.
->- [ASE_S-gram] Han Liu, Chao Liu, Wenqi Zhao, et al. S-gram: towards semantic-aware security auditing for ethereum smart contracts[C]//Proceedings of the 33rd ACM/IEEE international conference on automated software engineering. 2018: 814-819.
->- [TNSE_ContractWard] Wei Wang, Jingjing Song, Guangquan Xu, et al. Contractward: Automated vulnerability detection models for ethereum smart contracts[J]. IEEE Transactions on Network Science and Engineering, 2020, 8(2): 1133-1144.
->- [IJCNN_DeeSCVHunter] Xingxin Yu, Haoyue Zhao, Botao Hou, et al. Deescvhunter: A deep learning-based framework for smart contract vulnerability detection[C]//2021 International Joint Conference on Neural Networks (IJCNN). IEEE, 2021: 1-8.
->- [Universal_Approximation_Theorem] Kurt Hornik. Approximation capabilities of multilayer feedforward networks[J]. Neural networks, 1991, 4(2): 251-257.
->- [Universal_Approximators] Kurt Hornik, Maxwell B. Stinchcombe, Halbert White. Multilayer feedforward networks are universal approximators[J]. Neural networks, 1989, 2(5): 359-366.
->- [Sigmoidal] George Cybenko. Approximation by superpositions of a sigmoidal function[J]. Mathematics of control, signals and systems, 1989, 2(4): 303-314.
->- [CNN_Prove] Stéphane Mallat. Understanding deep convolutional networks[J]. Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences, 2016, 374(2065): 20150203.
->- [Transformer] Ashish Vaswani, Noam Shazeer, Niki Parmar, et al. Attention is all you need[J]. Advances in neural information processing systems, 2017, 30.
->- [Bert] Jacob Devlin, Ming-Wei Chang, Kenton Lee. Bert: Pre-training of deep bidirectional transformers for language understanding[C]//Proceedings of naacL-HLT. 2019, 1: 2.
->- [SVM_Prover] Shirish K. Shevade, S. Sathiya Keerthi, Chiranjib Bhattacharyya, et al. Improvements to the SMO algorithm for SVM regression[J]. IEEE transactions on neural networks, 2000, 11(5): 1188-1193.
->- [SVM_Rule] Haydemar Núñez, Cecilio Angulo, Andreu Català. Rule-based learning systems for support vector machines[J]. Neural Processing Letters, 2006, 24: 1-18.
->- [ML_Rules] Pat Langley, Herbert A. Simon. Applications of machine learning and rule induction[J]. Communications of the ACM, 1995, 38(11): 54-64.
->- [RF] Leo Breiman. Random forests[J]. Machine learning, 2001, 45: 5-32.
->- [TPAMI_MILIS] Zhouyu Fu, Antonio Robles-Kelly, Jun Zhou. MILIS: Multiple instance learning with instance selection[J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2010, 33(5): 958-977.
->- [AAAI_LossMIL] Xiaoshuang Shi, Fuyong Xing, Yuanpu Xie, et al. Loss-based attention for deep multiple instance learning[C]//Proceedings of the AAAI conference on artificial intelligence. 2020, 34(04): 5742-5749.
->- [ICML_Attention] Maximilian Ilse, Jakub M. Tomczak, Max Welling. Attention-based deep multiple instance learning[C]//International conference on machine learning. PMLR, 2018: 2127-2136.
->- [CCS_Making] Loi Luu, Duc-Hiep Chu, Hrishi Olickel, et al. Making smart contracts smarter[C]//Proceedings of the 2016 ACM SIGSAC conference on computer and communications security. 2016: 254-269. [ASE_Manticore] Mark Mossberg, Felipe Manzano, Eric Hennenfent, et al. Manticore: A user-friendly symbolic execution framework for binaries and smart contracts[C]//2019 34th IEEE/ACM International Conference on Automated Software Engineering (ASE). IEEE, 2019: 1186-1189.
->- [IJCAI_GNN] Yuan Zhuang, Zhenguang Liu, Peng Qian, et al. Smart Contract Vulnerability Detection using Graph Neural Network[C]//IJCAI. 2020: 3283-3290.
+- [NDSS_DTMC] Chuanpu Fu, Qi Li, Ke Xu. Detecting Unknown Encrypted Malicious Traffic in Real Time via Flow Interaction Graph Analysis[C]//NDSS. The Internet Society. 2023.
+- [TIT_Inequality] Ram Zamir. A proof of the Fisher information inequality via a data processing argument[J]. IEEE Transactions on Information Theory, 1998, 44(3): 1246-1250.
+- [ASE_S-gram] Han Liu, Chao Liu, Wenqi Zhao, et al. S-gram: towards semantic-aware security auditing for ethereum smart contracts[C]//Proceedings of the 33rd ACM/IEEE international conference on automated software engineering. 2018: 814-819.
+- [TNSE_ContractWard] Wei Wang, Jingjing Song, Guangquan Xu, et al. Contractward: Automated vulnerability detection models for ethereum smart contracts[J]. IEEE Transactions on Network Science and Engineering, 2020, 8(2): 1133-1144.
+- [IJCNN_DeeSCVHunter] Xingxin Yu, Haoyue Zhao, Botao Hou, et al. Deescvhunter: A deep learning-based framework for smart contract vulnerability detection[C]//2021 International Joint Conference on Neural Networks (IJCNN). IEEE, 2021: 1-8.
+- [Universal_Approximation_Theorem] Kurt Hornik. Approximation capabilities of multilayer feedforward networks[J]. Neural networks, 1991, 4(2): 251-257.
+- [Universal_Approximators] Kurt Hornik, Maxwell B. Stinchcombe, Halbert White. Multilayer feedforward networks are universal approximators[J]. Neural networks, 1989, 2(5): 359-366.
+- [Sigmoidal] George Cybenko. Approximation by superpositions of a sigmoidal function[J]. Mathematics of control, signals and systems, 1989, 2(4): 303-314.
+- [CNN_Prove] Stéphane Mallat. Understanding deep convolutional networks[J]. Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences, 2016, 374(2065): 20150203.
+- [Transformer] Ashish Vaswani, Noam Shazeer, Niki Parmar, et al. Attention is all you need[J]. Advances in neural information processing systems, 2017, 30.
+- [Bert] Jacob Devlin, Ming-Wei Chang, Kenton Lee. Bert: Pre-training of deep bidirectional transformers for language understanding[C]//Proceedings of naacL-HLT. 2019, 1: 2.
+- [SVM_Prover] Shirish K. Shevade, S. Sathiya Keerthi, Chiranjib Bhattacharyya, et al. Improvements to the SMO algorithm for SVM regression[J]. IEEE transactions on neural networks, 2000, 11(5): 1188-1193.
+- [SVM_Rule] Haydemar Núñez, Cecilio Angulo, Andreu Català. Rule-based learning systems for support vector machines[J]. Neural Processing Letters, 2006, 24: 1-18.
+- [ML_Rules] Pat Langley, Herbert A. Simon. Applications of machine learning and rule induction[J]. Communications of the ACM, 1995, 38(11): 54-64.
+- [RF] Leo Breiman. Random forests[J]. Machine learning, 2001, 45: 5-32.
+- [TPAMI_MILIS] Zhouyu Fu, Antonio Robles-Kelly, Jun Zhou. MILIS: Multiple instance learning with instance selection[J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2010, 33(5): 958-977.
+- [AAAI_LossMIL] Xiaoshuang Shi, Fuyong Xing, Yuanpu Xie, et al. Loss-based attention for deep multiple instance learning[C]//Proceedings of the AAAI conference on artificial intelligence. 2020, 34(04): 5742-5749.
+- [ICML_Attention] Maximilian Ilse, Jakub M. Tomczak, Max Welling. Attention-based deep multiple instance learning[C]//International conference on machine learning. PMLR, 2018: 2127-2136.
+- [CCS_Making] Loi Luu, Duc-Hiep Chu, Hrishi Olickel, et al. Making smart contracts smarter[C]//Proceedings of the 2016 ACM SIGSAC conference on computer and communications security. 2016: 254-269.
+- [ASE_Manticore] Mark Mossberg, Felipe Manzano, Eric Hennenfent, et al. Manticore: A user-friendly symbolic execution framework for binaries and smart contracts[C]//2019 34th IEEE/ACM International Conference on Automated Software Engineering (ASE). IEEE, 2019: 1186-1189.
+- [IJCAI_GNN] Yuan Zhuang, Zhenguang Liu, Peng Qian, et al. Smart Contract Vulnerability Detection using Graph Neural Network[C]//IJCAI. 2020: 3283-3290.
