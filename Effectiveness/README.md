@@ -12,16 +12,15 @@ In order to demonstrate the effective coverage of the semantic information of Vu
 
 The developed framework aims to quantitatively evaluate the information retained by the exiting instance recording modes, which decide the data representations for malicious instance detection, by using three metrics: (i) the amount of information, i.e., the average Shannon entropy obtained by recording one opcode operation; (ii) the scale of data, i.e., the space used to store the information; (iii) the density of information, i.e., the amount of information on a unit of storage.
 
-At first, this framework models an instance, i.e., a sequence of per-operation features, as a sequence of random variables represented by an aperiodic irreducible discrete-time Markov chain (DTMC) [NDSS_DTMC]. In this way, the useful data information for models can be quantified. Let ${\cal G}{\rm{ = }}\left\{ {{\cal V},{\cal E}} \right\}$ denote the state diagram of the DTMC, where ${\cal V}$ is the set of states (i.e., the values of the variables) and ${\cal E}$ denotes the edges. We define $s = \left| {\cal V} \right|$ as the number of different states and use ${\cal W} = {[{w_{ij}}]_{s \times s}}$ to denote the weight matrix of ${\cal G}$ . All of the weights are equal and normalized:
+At first, this framework models an instance, i.e., a sequence of per-operation features, as a sequence of random variables represented by an aperiodic irreducible discrete-time Markov chain (DTMC) [NDSS_DTMC]. In this way, the useful data information for models can be quantified. Let ${\cal G} = \left\lbrace {\cal V},{\cal E} \right\rbrace$ denote the state diagram of the DTMC, where ${\cal V}$ is the set of states (i.e., the values of the variables) and ${\cal E}$ denotes the edges. We define $s = \left| {\cal V} \right|$ as the number of different states and use ${\cal W} = {[{w_{ij}}]_{s \times s}}$ to denote the weight matrix of ${\cal G}$ . All of the weights are equal and normalized:
 
 $$ \forall {\kern 1pt} 1 \le i,j,m,n \le s,{\kern 1pt} ({w_{ij}} = {w_{mn}}) \vee ({w_{ij}} = 0 \vee {w_{mn}} = 0) $$
+
 $$ {w_i} = \sum\nolimits_{j = 1}^s {{w_{ij}}} ,{\kern 1pt} 1 = \sum\nolimits_{i = 1}^s {{w_i}} $$
 
-The state transition is performed based on the weights, i.e., the transition probability matrix $P = {[{P_{ij}}]_{s \times s}}$ and ${P_{ij}} = {{{w_{ij}}} \mathord{\left/
- {\vphantom {{{w_{ij}}} {{w_i}}}} \right.
- } {{w_i}}}$ . Therefore, the DTMC has a stationary distribution $\mu$ :
+The state transition is performed based on the weights, i.e., the transition probability matrix $P=[P_{ij}]_{s \times s}$ and $`P_{ij} = w_{ij} / {w_i}`$ . Therefore, the DTMC has a stationary distribution $\mu$ :
 
-$$ \left\{ {\begin{array}{*{20}{c}}
+$$ \left\lbrace {\begin{array}{*{20}{c}}
 {\mu P = \mu }\\
 {1 = \sum\nolimits_{i = 1}^s {{\mu _i}} }
 \end{array}} \right. \Rightarrow {\mu _i} = {w_i},{\kern 1pt} \forall {\kern 1pt} 1 \le i \le s $$
@@ -32,7 +31,7 @@ $$ \mu  \sim B(s,p) \to {\cal N}(sp,sp(1 - p)) $$
 
 Based on the distribution, we obtain the entropy rate of the DTMC, which is the expected Shannon entropy increase for each step in the state transition, i.e., the expected Shannon entropy of each random variable in the sequence, (using nat as unit, 1 *nat* $\approx$ 1.44 *bit*):
 
-$$ {\cal H}[{\cal G}] = \sum\limits_{i = 1}^s {{\mu _i}\sum\limits_{j = 1}^s {{P_{ij}}\ln \frac{1}{{{P_{ij}}}}} }  = \sum\limits_{i = 1}^s {{w_i}\ln {w_i}}  - \sum\limits_{i = 1}^s {\sum\limits_{j = 1}^s {{w_{ij}}\ln {w_{ij}}} }  = \ln \left| {\cal E} \right| - \frac{1}{2}\ln 2\pi esp(1 - p) $$
+$${\cal H}[{\cal G}] = \sum\limits_{i = 1}^s {{\mu_i}\sum\limits_{j = 1}^s {{P_{ij}}\ln \frac{1}{{{P_{ij}}}}} }  = \sum\limits_{i = 1}^s {{w_i}\ln {w_i}}  - \sum\limits_{i = 1}^s {\sum\limits_{j = 1}^s {{w_{ij}}\ln {w_{ij}}} }  = \ln \left| {\cal E} \right| - \frac{1}{2}\ln 2\pi esp(1 - p)$$
 
 Moreover, for the real-world instance size distribution, we assume that the length of the sequence of random variables obeys a geometric distribution with high skewness, i.e., $L \sim G(q)$ with a parameter: $0.5{\rm{ }} \le {\rm{ }}q{\rm{ }} \le {\rm{ }}0.9$ . ${\cal H}$ , ${\cal L}$ , and ${\cal D}$ denote the expectation of the metrics, i.e., the amount of information, the scale of data, and the density, respectively.
 
@@ -40,146 +39,203 @@ Then, by using this framework, we model five types of contract execution sequenc
 
 #### Idealized Recording Mode
 
-The idealized recording mode has infinite storage and captures optimal fidelity instance information by recording all of random variables from the sequence without any processing. In other words, this mode collects all the original information of instances. Thus, the obtained information entropy of the idealized mode grows at the entropy rate of the DTMC:
+The idealized recording mode has infinite storage and captures optimal fidelity instance information by recording all random variables from the sequence without any processing. In other words, this mode collects all the original information of instances. Thus, the obtained information entropy of the idealized mode grows at the entropy rate of the DTMC:
 
-$$ {{\cal H}_{Ideal}} = E[L{\cal H}[{\cal G}]] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l] \cdot l}  \cdot {\cal H}[{\cal G}] = \frac{1}{q} \cdot {\cal H}[{\cal G}] = \frac{1}{q}ln\left| {\cal E} \right| - \frac{1}{{2q}}\ln 2\pi esp(1 - p) $$
+```math
+{{\cal H}_{Ideal}} = E[L{\cal H}[{\cal G}]] = \sum\nolimits_{l = 1}^\infty {{\mathbb{P}[L = l] \cdot l}  \cdot {\cal H}[{\cal G}]} = \frac{1}{q} \cdot {\cal H}[{\cal G}] = \frac{1}{q}ln\left| {\cal E} \right| - \frac{1}{{2q}}\ln 2\pi esp(1 - p)
+```
 
 According to data processing inequality [TIT_Inequality], the information retained in the idealized recording mode reaches the optimal value. Also, we can obtain the scale of data and the density of information for the idealized recording mode as follows:
 
-$$ {{\cal L}_{Ideal}} = E[L] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l] \cdot l}  = \sum\nolimits_{l = 1}^\infty  {q{{(1 - q)}^{l - 1}} \cdot l}  = \frac{1}{q} $$
-$${{\cal D}_{Ideal}} = \frac{{{{\cal H}_{Ideal}}}}{{{{\cal L}_{Ideal}}}} = {\cal H}[{\cal G}] = \ln \left| {\cal E} \right| - \frac{1}{2}\ln 2\pi esp(1 - p)$$
+```math
+{{\cal L}_{Ideal}} = E[L] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l] \cdot l}  = \sum\nolimits_{l = 1}^\infty  {q{{(1 - q)}^{l - 1}} \cdot l}  = \frac{1}{q}
+```
+```math
+{{\cal D}_{Ideal}} = \frac{{{{\cal H}_{Ideal}}}}{{{{\cal L}_{Ideal}}}} = {\cal H}[{\cal G}] = \ln \left| {\cal E} \right| - \frac{1}{2}\ln 2\pi esp(1 - p)
+```
 
 #### Opcode sequences-based Recording Mode of VulHunter
 
-VulHunter applies different recording strategies for short and long instances, i.e., when $L > T$ it maintains the *K* operation features given the unified instance lengths for models, and when $L \le T$ it records detailed per-operation features. Let ${{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}$ denote the random set of the recorded information. For short instances, all the random variables are collected in ${{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}$ . For long instances, ${{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}$ collects the first *T* opcodes of them. First, we decompose the entropy of the opcode sequence-based recording mode as the terms for short and long instances:
+VulHunter applies different recording strategies for short and long instances, i.e., when $L > T$ it maintains the *K* operation features given the unified instance lengths for models, and when $L \le T$ it records detailed per-operation features. Let $`{{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}`$ denote the random set of the recorded information. For short instances, all the random variables are collected in $`{{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}`$ . For long instances, $`{{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}`$ collects the first *T* opcodes of them. First, we decompose the entropy of the opcode sequence-based recording mode as the terms for short and long instances:
 
-$${{\cal H}_{{\rm{V}}{\rm{.H}}{\rm{.}}}} = {\cal H}[{{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}|L] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l]}  \cdot {\cal H}[{{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}|L = l] = {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L] + {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L] $$
-$$\left\{ {\begin{array}{*{20}{c}}
+```math
+{{\cal H}_{{\rm{V}}{\rm{.H}}{\rm{.}}}} = {\cal H}[{{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}|L] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l]}  \cdot {\cal H}[{{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}|L = l] = {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L] + {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L]
+```
+```math
+\left\lbrace {\begin{array}{*{20}{c}}
 {{\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L] = \sum\nolimits_{l = 1}^T {\mathbb{P}[L = l] \cdot {\cal H}[{{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}|L = l]} }\\
 {{\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L] = \sum\nolimits_{l = T + 1}^\infty  {\mathbb{P}[L = l] \cdot {\cal H}[{{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}|L = l]} }
-\end{array}} \right.$$
+\end{array}} \right.
+```
 
 **Short Instance Information.** VulHunter records detailed per-operation feature sequences for short instances which is the same as the lossless recording in the idealized mode. Thus, the increasing rate of information equals the entropy rate of the DTMC:
 
-$${\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L = l] = l \cdot {\cal H}[{\cal G}]$$
-$${\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L] = \sum\nolimits_{l = 1}^T {\mathbb{P}[L = l] \cdot l \cdot {\cal H}[{\cal G}]}  = {\cal H}[{\cal G}] \cdot q \cdot \sum\nolimits_{l = 1}^T {l \cdot {{(1 - q)}^{l - 1}}}  = \frac{{1 - {\rm{(T}}q + {\rm{1)(1}} - q{{\rm{)}}^T}}}{q} \cdot {\cal H}[{\cal G}]$$
+```math
+{\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L = l] = l \cdot {\cal H}[{\cal G}]
+```
+```math
+{\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L] = \sum\nolimits_{l = 1}^T {\mathbb{P}[L = l] \cdot l \cdot {\cal H}[{\cal G}]}  = {\cal H}[{\cal G}] \cdot q \cdot \sum\nolimits_{l = 1}^T {l \cdot {{(1 - q)}^{l - 1}}}  = \frac{{1 - {\rm{(T}}q + {\rm{1)(1}} - q{{\rm{)}}^T}}}{q} \cdot {\cal H}[{\cal G}]
+```
 
-**Long Instance Information.** When  , the random set collects the first   operations/opcodes and records detailed per-operation feature sequences. In this way, the calculating process of the entropy rate is similar to that of short instances:
+**Long Instance Information.** When $L > T$ , the random set collects the first *T* operations/opcodes and records detailed per-operation feature sequences. In this way, the calculating process of the entropy rate is similar to that of short instances:
 
-$${\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L = l] = T \cdot {\cal H}[{\cal G}]$$
-$${\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L] = \sum\nolimits_{l = K{\rm{ + }}1}^\infty  {\mathbb{P}[L = l] \cdot {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L = l]}  = \sum\nolimits_{l = T{\rm{ + }}1}^\infty  {q{{{\rm{(1}} - q{\rm{)}}}^{l - {\rm{1}}}} \cdot T \cdot {\cal H}[{\cal G}]}  = T{{\rm{(1}} - q{\rm{)}}^T} \cdot {\cal H}[{\cal G}]$$
+```math
+{\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L = l] = T \cdot {\cal H}[{\cal G}]
+```
+```math
+{\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L] = \sum\nolimits_{l = K{\rm{ + }}1}^\infty  {\mathbb{P}[L = l] \cdot {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L = l]}  = \sum\nolimits_{l = T{\rm{ + }}1}^\infty  {q{{{\rm{(1}} - q{\rm{)}}}^{l - {\rm{1}}}} \cdot T \cdot {\cal H}[{\cal G}]}  = T{{\rm{(1}} - q{\rm{)}}^T} \cdot {\cal H}[{\cal G}]
+```
 
-Finally, we take ${\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L]$ and ${\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L]$ in ${{\cal H}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}$  and complete the analysis for the entropy of the opcode sequence-based recording mode.
+Finally, we take $`{\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L]`$ and $`{\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L]$ in ${{\cal H}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}`$  and complete the analysis for the entropy of the opcode sequence-based recording mode.
 
-$$ {{\cal H}_{{\rm{V}}{\rm{.H}}{\rm{.}}}} = {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L] + {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L] = (\frac{{1 - {\rm{(}}Tq + {\rm{1)(1}} - q{{\rm{)}}^T}}}{q} + T{{\rm{(1}} - q{\rm{)}}^T}) \cdot {\cal H}[{\cal G}] = \frac{{1 - {{{\rm{(1}} - q{\rm{)}}}^T}}}{q} \cdot {\cal H}[{\cal G}] $$
+```math
+{{\cal H}_{{\rm{V}}{\rm{.H}}{\rm{.}}}} = {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L] + {\cal H}[{\cal X}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L] = (\frac{{1 - {\rm{(}}Tq + {\rm{1)(1}} - q{{\rm{)}}^T}}}{q} + T{{\rm{(1}} - q{\rm{)}}^T}) \cdot {\cal H}[{\cal G}] = \frac{{1 - {{{\rm{(1}} - q{\rm{)}}}^T}}}{q} \cdot {\cal H}[{\cal G}]
+```
 
 Similarly, we obtain the expected data scale by analyzing the conditions of short and long instances separately:
 
-$$\begin{array}{c}
+```math
+\begin{array}{c}
 {{\cal L}_{{\rm{V}}{\rm{.H}}{\rm{.}}}} = {\mathop{\rm E}\nolimits} [{\cal L}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^S|L] + {\mathop{\rm E}\nolimits} [{\cal L}_{{\rm{V}}{\rm{.H}}{\rm{.}}}^L|L] = \sum\nolimits_{l = 1}^T {\mathbb{P}[L = l] \cdot L}  + \sum\nolimits_{l = T{\rm{ + }}1}^\infty  {\mathbb{P}[L = l] \cdot } T\\
  = \sum\nolimits_{l = 1}^T {q{{(1 - q)}^{l - 1}} \cdot l + } \sum\nolimits_{l = T + 1}^\infty  {q{{(1 - q)}^{l - 1}} \cdot T} {\rm{ = }}\frac{{1 - {\rm{(}}Tq + 1{\rm{)(}}1 - q{{\rm{)}}^T}}}{q} + T{(1 - q)^T} = \frac{{1 - {{{\rm{(}}1 - q{\rm{)}}}^T}}}{q}
-\end{array}$$
+\end{array}
+```
 
-Also, we obtain the expected information density by its definition: ${{\cal D}_{{\rm{V}}{\rm{.H}}{\rm{.}}}} = {{{{\cal H}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}} \mathord{\left/
- {\vphantom {{{{\cal H}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}} {{{\cal L}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}}}} \right.
- } {{{\cal L}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}}}$ and complete the analysis for the opcode sequence-based recording mode used by VulHunter.
+Also, we obtain the expected information density by its definition: $`{{\cal D}_{{\rm{V}}{\rm{.H}}{\rm{.}}}} = {{{{\cal H}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}} / {{{\cal L}_{{\rm{V}}{\rm{.H}}{\rm{.}}}}}}`$ and complete the analysis for the opcode sequence-based recording mode used by VulHunter.
 
 #### Event-based Mode
 
-Let random variable ${{\cal X}_{{\rm{Eve,}}}}$ indicate if the event-based mode records an event for an instance denoted by a random variable sequence, $\left\langle {s _1,s _2, \ldots ,{s_L}} \right\rangle$ , where $L \sim G(q)$ . Then, we assume that the mode can merge repetitive events. First, we obtain the probability distribution of the random variable ${{\cal X}_{{\rm{Eve,}}}}$ :
+Let random variable $`{{\cal X}_{{\rm{Eve,}}}}`$ indicate if the event-based mode records an event for an instance denoted by a random variable sequence, $`\left\langle {s _1,s _2, \ldots ,{s_L}} \right\rangle`$ , where $L \sim G(q)$ . Then, we assume that the mode can merge repetitive events. First, we obtain the probability distribution of the random variable ${{\cal X}_{{\rm{Eve,}}}}$ :
 
-$$\mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 1] = 1 - \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0]$$
-$$\mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l] \cdot \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0\left| {L = l} \right.]}  = \sum\nolimits_{l = 1}^\infty  {{{(1 - q)}^{l - 1}}}  \cdot q \cdot {(1 - {p^s})^l} = \frac{{q(1 - {p^s})}}{{{p^s} + q(1 - {p^s})}}$$
+```math
+\mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 1] = 1 - \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0]
+```
+```math
+\mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l] \cdot \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0\left| {L = l} \right.]}  = \sum\nolimits_{l = 1}^\infty  {{{(1 - q)}^{l - 1}}}  \cdot q \cdot {(1 - {p^s})^l} = \frac{{q(1 - {p^s})}}{{{p^s} + q(1 - {p^s})}}
+```
 
-Then, we obtain the entropy of the random variable ${{\cal X}_{{\rm{Eve,}}}}$ :
+Then, we obtain the entropy of the random variable $`{{\cal X}_{{\rm{Eve,}}}}`$ :
 
-$${{\cal H}_{{\rm{Eve}}{\rm{.}}}} = {\cal H}[{{\cal X}_{{\rm{Eve,}}}}] =  - \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0]ln\mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0] - \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 1]ln\mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 1]$$
+```math
+{{\cal H}_{{\rm{Eve}}{\rm{.}}}} = {\cal H}[{{\cal X}_{{\rm{Eve,}}}}] =  - \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0]ln\mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 0] - \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 1]ln\mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 1]
+```
 
-We observe that $\frac{{\partial {\cal H}[{{\cal X}_{{\rm{Eve,}}}}]}}{{\partial q}} \approx 0$ when $q > 0.5$ . Thus, we use the second-order taylor series of *q* to approach ${{\cal H}_{{\rm{Eve}}{\rm{.}}}}$ :
+We observe that $`\frac{{\partial {\cal H}[{{\cal X}_{{\rm{Eve,}}}}]}}{{\partial q}} \approx 0`$ when $q > 0.5$ . Thus, we use the second-order taylor series of *q* to approach $`{{\cal H}_{{\rm{Eve}}{\rm{.}}}}`$ :
 
-$${{\cal H}_{{\rm{Eve}}{\rm{.}}}} = \frac{{2q(1 - {p^s})ln\frac{{q({p^s} - 1)}}{{q({p^s} - 1) - {p^s}}}}}{{q({p^s} - 1) - {p^s}}} =  - 2\theta \ln \theta $$
+```math
+{{\cal H}_{{\rm{Eve}}{\rm{.}}}} = \frac{{2q(1 - {p^s})ln\frac{{q({p^s} - 1)}}{{q({p^s} - 1) - {p^s}}}}}{{q({p^s} - 1) - {p^s}}} =  - 2\theta \ln \theta
+```
 
-where $\theta  = \frac{\varsigma }{\eta }$ , $\varsigma  = q({p^s} - 1)$ , and $\eta  = q({p^s} - 1) - {p^s}$ . Similarly, we obtain the expected data scale ${{\cal L}_{{\rm{Eve}}{\rm{.}}}}$ and the information density ${{\cal D}_{{\rm{Eve}}{\rm{.}}}}$  :
+where $\theta  = \frac{\varsigma }{\eta }$ , $\varsigma  = q({p^s} - 1)$ , and $`\eta  = q({p^s} - 1) - {p^s}`$ . Similarly, we obtain the expected data scale $`{{\cal L}_{{\rm{Eve}}{\rm{.}}}}`$ and the information density $`{{\cal D}_{{\rm{Eve}}{\rm{.}}}}`$  :
 
-$${{\cal L}_{{\rm{Eve}}{\rm{.}}}} = \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 1] = \frac{{{p^s}}}{{q(1 - {p^s}) + {p^s}}} =  - \frac{{{p^s}}}{\eta } = \frac{{{p^s}}}{{q(1 - {p^s}) + {p^s}}}$$
-$${{\cal D}_{{\rm{Eve}}{\rm{.}}}} = \frac{{{{\cal H}_{{\rm{Eve}}{\rm{.}}}}}}{{{{\cal L}_{{\rm{Eve}}{\rm{.}}}}}} = \frac{{2\varsigma }}{{{p^s}}} \cdot \ln \theta  = \frac{{2q({p^s} - 1)}}{{{p^s}}} \cdot \ln \frac{{q({p^s} - 1)}}{{q({p^s} - 1) - {p^s}}}$$
+```math
+{{\cal L}_{{\rm{Eve}}{\rm{.}}}} = \mathbb{P}[{{\cal X}_{{\rm{Eve,}}}} = 1] = \frac{{{p^s}}}{{q(1 - {p^s}) + {p^s}}} =  - \frac{{{p^s}}}{\eta } = \frac{{{p^s}}}{{q(1 - {p^s}) + {p^s}}}$$
+$${{\cal D}_{{\rm{Eve}}{\rm{.}}}} = \frac{{{{\cal H}_{{\rm{Eve}}{\rm{.}}}}}}{{{{\cal L}_{{\rm{Eve}}{\rm{.}}}}}} = \frac{{2\varsigma }}{{{p^s}}} \cdot \ln \theta  = \frac{{2q({p^s} - 1)}}{{{p^s}}} \cdot \ln \frac{{q({p^s} - 1)}}{{q({p^s} - 1) - {p^s}}}
+```
 
 Here, we complete the analysis for the event-based mode.
 
 #### Sampling-based Mode
 
-We use ${{\cal X}_{{\rm{Samp}}{\rm{.}}}}$ to denote the random variable to be recorded as the instance information in the sampling-based mode which is the sum of the observed per-operation features denoted by the random variable sequence. We can obtain the distribution of ${{\cal X}_{{\rm{Samp}}{\rm{.}}}}$ as follows:
+We use $`{{\cal X}_{{\rm{Samp}}{\rm{.}}}}`$ to denote the random variable to be recorded as the instance information in the sampling-based mode, which is the sum of the observed per-operation features denoted by the random variable sequence. We can obtain the distribution of $`{{\cal X}_{{\rm{Samp}}{\rm{.}}}}`$ as follows:
 
-$${{\cal X}_{{\rm{Samp}}{\rm{.}}}} = \sum\nolimits_{i = 1}^L {{s_i}} ,{\kern 1pt} {s_i} \sim B(s,p) \Rightarrow {{\cal X}_{{\rm{Samp}}{\rm{.}}}} \sim B(Ls,p)$$
+```math
+{{\cal X}_{{\rm{Samp}}{\rm{.}}}} = \sum\nolimits_{i = 1}^L {{s_i}} ,{\kern 1pt} {s_i} \sim B(s,p) \Rightarrow {{\cal X}_{{\rm{Samp}}{\rm{.}}}} \sim B(Ls,p)
+```
 
-The amount of the information recorded by the sampling-based mode is the Shannon entropy of ${{\cal X}_{{\rm{Samp}}{\rm{.}}}}$ . We decompose the entropy as conditional entropy and mutual information:
+The amount of the information recorded by the sampling-based mode is the Shannon entropy of $`{{\cal X}_{{\rm{Samp}}{\rm{.}}}}`$ . We decompose the entropy as conditional entropy and mutual information:
 
-$${{\cal H}_{{\rm{Samp}}{\rm{.}}}} = {\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}] = {\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}\left| L \right.] + \Gamma ({{\cal X}_{{\rm{Samp}}{\rm{.}}}};L)$$
+```math
+{{\cal H}_{{\rm{Samp}}{\rm{.}}}} = {\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}] = {\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}\left| L \right.] + \Gamma ({{\cal X}_{{\rm{Samp}}{\rm{.}}}};L)
+```
 
-We assume that the mutual information between the sequence length *L* and the accumulative statistic ${{\cal X}_{{\rm{Samp}}{\rm{.}}}}$ is close to zero. It implies the impossibility of inferring the statistic from the length of the opcode sequence. Then we obtain a lower bound of the entropy as an estimation which is verified to be a tight bound via numerical analysis:
+We assume that the mutual information between the sequence length *L* and the accumulative statistic $`{{\cal X}_{{\rm{Samp}}{\rm{.}}}}`$ is close to zero. It implies the impossibility of inferring the statistic from the length of the opcode sequence. Then we obtain a lower bound of the entropy as an estimation, which is verified to be a tight bound via numerical analysis:
 
-$${\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}|L = l] = \frac{1}{2}\ln 2\pi elsp(1 - p)$$
-$${{\cal H}_{{\rm{Samp}}{\rm{.}}}} = {\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}|L] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l] \cdot {\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}|L = l]}  = \frac{1}{2}\ln 2\pi esp(1 - p + \frac{q}{2}\sum\nolimits_{l = 1}^\infty  {{{(1 - q)}^{l - 1}}\ln l} $$
+```math
+{\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}|L = l] = \frac{1}{2}\ln 2\pi elsp(1 - p)
+```
+```math
+{{\cal H}_{{\rm{Samp}}{\rm{.}}}} = {\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}|L] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l] \cdot {\cal H}[{{\cal X}_{{\rm{Samp}}{\rm{.}}}}|L = l]}  = \frac{1}{2}\ln 2\pi esp(1 - p + \frac{q}{2}\sum\nolimits_{l = 1}^\infty  {{{(1 - q)}^{l - 1}}\ln l}
+```
 
-We observed that the second-order taylor series can accurately approach the second term of the entropy:
+We observed that the second-order Taylor series can accurately approach the second term of the entropy:
 
-$${{\cal H}_{{\rm{Samp}}{\rm{.}}}} = \frac{1}{2}\ln 2\pi esp(1 - p) + \frac{{\ln 2}}{2}q(1 - q)$$
+```math
+{{\cal H}_{{\rm{Samp}}{\rm{.}}}} = \frac{1}{2}\ln 2\pi esp(1 - p) + \frac{{\ln 2}}{2}q(1 - q)
+```
 
 Finally, we obtain the expected data scale (i.e., the sum of binomially distributed variables) and the information density similar to the analysis for the event-based mode and complete the analysis for the sampling-based mode. 
 
-$${{\cal L}_{{\rm{Samp}}{\rm{.}}}} = 1$$
-$${{\cal D}_{{\rm{Samp}}{\rm{.}}}} = \frac{{{{\cal H}_{{\rm{Samp}}{\rm{.}}}}}}{{{{\cal L}_{{\rm{Samp}}{\rm{.}}}}}} = {{\cal H}_{{\rm{Samp}}{\rm{.}}}} = \frac{1}{2}\ln 2\pi esp(1 - p) + \frac{{\ln 2}}{2}q(1 - q)$$
+```math
+{{\cal L}_{{\rm{Samp}}{\rm{.}}}} = 1
+```
+```math
+{{\cal D}_{{\rm{Samp}}{\rm{.}}}} = \frac{{{{\cal H}_{{\rm{Samp}}{\rm{.}}}}}}{{{{\cal L}_{{\rm{Samp}}{\rm{.}}}}}} = {{\cal H}_{{\rm{Samp}}{\rm{.}}}} = \frac{1}{2}\ln 2\pi esp(1 - p) + \frac{{\ln 2}}{2}q(1 - q)
+```
 
 #### Statistics-based Mode
 
-We use   to denote the random set that collects the counters for distribution fitting. When the DTMC has s states, the histogram has s counters  , i.e.,  . We assume that the counters are independent: ${v_i} = \sum\nolimits_{j = 1}^L {{\delta _j}}$ and 
+We use $`{{\cal X}_{{\rm{Stat}}{\rm{.}}}}`$ to denote the random set that collects the counters for distribution fitting. When the DTMC has s states, the histogram has s counters $`{v_1},{v_2}, \ldots ,{v_s}`$ , i.e., $`{{\cal X}_{{\rm{Stat}}{\rm{.}}}} = \left\{ {{v_1},{v_2}, \ldots ,{v_s}} \right\}`$ . We assume that the counters are independent: ${v_i} = \sum\nolimits_{j = 1}^L {{\delta _j}}$ and 
 
-$$ {\delta _j} = \left\{ {\begin{array}{*{20}{c}}
+```math
+{\delta _j} = \left\lbrace {\begin{array}{*{20}{c}}
 {1,{\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\rm{if}}{\kern 1pt} {s_j}{\kern 1pt} {\kern 1pt} {\rm{is}}{\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\rm{the}}{\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {i^{{\rm{th}}}}{\kern 1pt} {\kern 1pt} {\kern 1pt} {\rm{state}}}\\
 {0,{\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\rm{else}}{\rm{.                     }}}
-\end{array}} \right.$$
+\end{array}} \right.
+```
 
-We observe that $\left\{ {{v_1},{v_2}, \ldots ,{v_s}} \right\}$ is a binomial process:
+We observe that $`\left\lbrace {{v_1},{v_2}, \ldots ,{v_s}} \right\rbrace`$ is a binomial process:
 
-$$\begin{array}{c}
+```math
+\begin{array}{c}
 {v_i} \sim B(L,\mathbb{P}[{s_i} = i])\\
  \sim B(L,C_s^i{p^i}{(1 - p)^{s - i}})
-\end{array}$$
+\end{array}
+```
 
-To obtain the closed-form solution, we use as $\frac{{{{(sp)}^i}{e^{ - sp}}}}{{i!}}$ an estimation of $C_s^i{p^i}{(1 - p)^{s - i}}$ . Moreover, the length of the long instance is relatively large, which implies ${v_i}$ approaches a Poisson distribution:
+To obtain the closed-form solution, we use as $`\frac{{{{(sp)}^i}{e^{ - sp}}}}{{i!}}`$ an estimation of $`C_s^i{p^i}{(1 - p)^{s - i}}`$ . Moreover, the length of the long instance is relatively large, which implies $`{v_i}`$ approaches a Poisson distribution:
 
-$$\begin{array}{c}
+```math
+\begin{array}{c}
 {v_i} \sim \pi (L,\mathbb{P}[{s_i} = i])\\
  \sim \pi ({\lambda _i}),{\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\lambda _i} = \frac{{{{(sp)}^i}{e^{ - sp}}}}{{i!}}
-\end{array}$$
+\end{array}
+```
 
 Based on the distribution of the collected counters, we obtain the entropy of the random set:
 
-$${\cal H}[{{\cal X}_{{\rm{Stat}}{\rm{.}}}}|L = l] = \sum\nolimits_{i = 1}^s {{\cal H}[{v_i}|L = l]}  = \sum\nolimits_{i = 1}^s {\frac{1}{2}\ln 2\pi el} \frac{{{{(sp)}^i}{e^{ - sp}}}}{{i!}}$$
-$$\begin{array}{c}
+```math
+{\cal H}[{{\cal X}_{{\rm{Stat}}{\rm{.}}}}|L = l] = \sum\nolimits_{i = 1}^s {{\cal H}[{v_i}|L = l]}  = \sum\nolimits_{i = 1}^s {\frac{1}{2}\ln 2\pi el} \frac{{{{(sp)}^i}{e^{ - sp}}}}{{i!}}
+```
+```math
+\begin{array}{c}
 {\cal H}[{{\cal X}_{{\rm{Stat}}{\rm{.}}}}|L] = \sum\nolimits_{l = 1}^\infty  {\mathbb{P}[L = l] \cdot {\cal H}[{{\cal X}_{{\rm{Stat}}{\rm{.}}}}|L = l]}  = \sum\nolimits_{l = 1}^\infty  {q{{(1 - q)}^{l - 1}}}  \cdot \sum\nolimits_{i = 1}^s {\frac{1}{2}\ln 2\pi el} \frac{{{{(sp)}^i}{e^{ - sp}}}}{{i!}}\\
 {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt}  = \frac{1}{2}[s\ln 2\pi e + \frac{{s{\rm{(}}s + 1{\rm{)}}}}{2}\ln sp - {s^2}p - \sum\nolimits_{i = 1}^s {\ln i!} ] + \frac{{qs}}{2}[\sum\nolimits_{l = 1}^\infty  {{{{\rm{(}}1 - q{\rm{)}}}^{l - 1}}\ln l} ]
-\end{array}$$
+\end{array}
+```
 
-The assumption of $q > 0.5$ implies ${K^{{\rm{th}}}}$ order Taylor series can accurately approach the last term in the above equation. Moreover, we utilize the quadric term of s in the Taylor series of $\sum\nolimits_{i = 1}^s {\ln i!}$ to approach the entropy of long instances ( $\gamma$  is Euler–Mascheroni constant):
+The assumption of $q > 0.5$ implies $`{K^{{\rm{th}}}}`$ order Taylor series can accurately approach the last term in the above equation. Moreover, we utilize the quadric term of *s* in the Taylor series of $`\sum\nolimits_{i = 1}^s {\ln i!}`$ to approach the entropy of long instances ( $\gamma$  is Euler–Mascheroni constant):
 
-$${{\cal H}_{{\rm{Stat}}{\rm{.}}}} = \frac{s}{4}[2\ln 2\pi e + {\rm{(}}s + 1{\rm{)}}\ln sp + 2q\ln K - 2s(1 + p + \gamma )] + \frac{{qs}}{2}[\sum\nolimits_{l = 1}^K {{{{\rm{(}}1 - q{\rm{)}}}^{l - 1}}\ln l} ]$$
+```math
+{{\cal H}_{{\rm{Stat}}{\rm{.}}}} = \frac{s}{4}[2\ln 2\pi e + {\rm{(}}s + 1{\rm{)}}\ln sp + 2q\ln K - 2s(1 + p + \gamma )] + \frac{{qs}}{2}[\sum\nolimits_{l = 1}^K {{{{\rm{(}}1 - q{\rm{)}}}^{l - 1}}\ln l} ]
+```
 
 Then, we obtain the expected data scale (i.e., the sum of the Poisson distributed variables), which is similar to that of the sampling mode:
 
-$${{\cal L}_{{\rm{Stat}}{\rm{.}}}} = 1$$
+```math
+{{\cal L}_{{\rm{Stat}}{\rm{.}}}} = 1
+```
 
-Also, we obtain the expected information density by its definition: ${{\cal D}_{{\rm{Stat}}{\rm{.}}}} = {{{{\cal H}_{{\rm{Stat}}{\rm{.}}}}} \mathord{\left/
- {\vphantom {{{{\cal H}_{{\rm{Stat}}{\rm{.}}}}} {{{\cal L}_{{\rm{Stat}}{\rm{.}}}}}}} \right.
- } {{{\cal L}_{{\rm{Stat}}{\rm{.}}}}}}$ and complete the analysis for the statistics-based recording mode.
+Also, we obtain the expected information density by its definition: $`{{\cal D}_{{\rm{Stat}}{\rm{.}}}} = {{{{\cal H}_{{\rm{Stat}}{\rm{.}}}}} / {{{\cal L}_{{\rm{Stat}}{\rm{.}}}}}}`$ and complete the analysis for the statistics-based recording mode.
 
 ### Comparative result analysis
 
-We perform numerical studies to compare the instance recording modes in real-world settings. We select the opcode value as the per-operation feature, then we measure the parameters of the DTMC, i.e., $\left| {\cal V} \right| = 135$ and $\left| {\cal E} \right| = 3777$ according to the instances of contracts (total of 222,310) in Dataset_1 and Dataset_4. We also choose *K=512* and estimate the geometric distribution parameter *q* via the second moment. The following three key results can be concluded.
+We perform numerical studies to compare the instance recording modes in real-world settings. We select the opcode value as the per-operation feature, then we measure the parameters of the DTMC, i.e., $`\left| {\cal V} \right| = 135`$ and $`\left| {\cal E} \right| = 3777`$ according to the instances of contracts (total of 222,310) in Dataset_1 and Dataset_4. We also choose *K=512* and estimate the geometric distribution parameter *q* via the second moment. The following three key results can be concluded.
 
 <img src="Document_figures/information_entroy.png" alt="img" style="zoom:100%;" />
 
-1. **VulHunter maintains more information using the opcode sequences of instances than other modes.** The above sub-figure (a) shows the results on the feasible region ( ${{\cal F}_{{\rm{Stat}}{\rm{.}}}} = \{ 0.1 \le p \le 0.9,0.5 \le q \le 0.9\}$ ). We observe that VulHunter maintains at least 1.5~3 times the information entropy than instance recording modes based on the sampling and statistics, and far overweigh the event-based mode. Also, the more long instances (i.e., the lower value of the geometric distribution parameter *q*), the more obvious the gap. Thus, the opcode sequences-based mode can retain high-fidelity instance interaction information. 
+1. **VulHunter maintains more information using the opcode sequences of instances than other modes.** The above sub-figure (a) shows the results on the feasible region ( $`{{\cal F}_{{\rm{Stat}}{\rm{.}}}} = \lbrace 0.1 \le p \le 0.9,0.5 \le q \le 0.9
+brace`$ ). We observe that VulHunter maintains at least 1.5~3 times the information entropy than instance recording modes based on the sampling and statistics, and far overweigh the event-based mode. Also, the more long instances (i.e., the lower value of the geometric distribution parameter *q*), the more obvious the gap. Thus, the opcode sequences-based mode can retain high-fidelity instance interaction information. 
 
 2. **VulHunter maintains near-optimal information using opcode sequences.** According to the sub-figure (a), we observe that the information maintained by the sequence is almost equal to the theoretical optimum, with the difference ranging from $5.60 \times {10^{ - 14}}$ to $6.80 \times {10^{ - 4}}$  *nat*. When the parameter *q* approaches 0.5, the instance information loss is relatively larger, given the increasing ratio of long instances that incur more information loss. To reduce the loss, we employ a large length parameter *T=512* to cover as many operation semantics as possible. Nevertheless, the larger the value of *T*, the less operation loss, which enables the model to achieve better performance without overfitting, as shown in the experiment results of Section 4.7.
 
@@ -189,13 +245,13 @@ We perform numerical studies to compare the instance recording modes in real-wor
 
 ## Accurate model inference
 
-We demonstrate the reasoning effectiveness of DL (Deep Learning) and traditional ML (Meachine Learning) models from their design goals, realization principles, and mathematical theories. Then, we illustrate the motivations of model attention to provide evidence for the effectiveness of our method. Finally, we explain the overall effectiveness of the detection framework based on the Multiple-instance learning (MIL) mechanism. In the following contents, we will explain their effectiveness in theory one by one.
+We demonstrate the reasoning effectiveness of DL (Deep Learning) and traditional ML (Machine Learning) models from their design goals, realization principles, and mathematical theories. Then, we illustrate the motivations of model attention to provide evidence for the effectiveness of our method. Finally, we explain the overall effectiveness of the detection framework based on the Multiple-instance learning (MIL) mechanism. In the following contents, we will explain their effectiveness in theory one by one.
 
 ### Effectiveness evidence for DL models
 
 Due to the generality and extensibility framework of VulHunter, he can employ the DL networks (e.g., Recurrent Neural Network and Convolutional Neural Network) and traditional ML models (e.g., Random Forest and Support Vector Machine) to further improve the detection performance, which is discussed in Section 4.6. In this section, we first explain the effectiveness of mainly used DL models, i.e., Recurrent Neural Network and Convolutional Neural Network, given their superior fitting ability compared to traditional ML models.
 
-Neural networks feel like a bionic approach and are regarded as simulations of the nervous system in animal brains. From a mathematical perspective, a multi-layer neural network is essentially a composite function. The Universal Approximation Theorem demonstrates the fitting ability of neural networks, which is similar to the polynomial approximation. Specifically, it explains that neural networks have a kind of universality, i.e. no matter what mapping function ${\rm f} (x)$ for any finite measurable partition of ${I_n}$ is, there is a network with at least 1 hidden layer (a finite number of weights) that can approximately approach the function [Universal_Approximation_Theorem] [Universal_Approximators] [Sigmoidal]. That is, let $C(\mathbb{R}^n,\mathbb{R}^m)$ denote the set of functions from a subset of a Euclidean $\mathbb{R}^n$ space to a Euclidean space $\mathbb{R}^m$   ( $n,m \in  \mathbb{N}$ ). Let $\varphi  \in C(\mathbb{R},\mathbb{R})$ , and $\varphi  \circ x$  denotes $\varphi$ applied to each component of *x*. For any $\varepsilon  > 0$  , *n*, *m*, and  $\varphi$ , there exist $k \in \mathbb{N}$ ,  $A \in {\mathbb{R}^{k \times n}}$  ,  $b \in {\mathbb{R}^k}$  ,  and $V \in {\mathbb{R}^{m \times k}}$ , such that
+Neural networks feel like a bionic approach and are regarded as simulations of the nervous system in animal brains. From a mathematical perspective, a multi-layer neural network is essentially a composite function. The Universal Approximation Theorem demonstrates the fitting ability of neural networks, which is similar to the polynomial approximation. Specifically, it explains that neural networks have a kind of universality, i.e. no matter what mapping function ${\rm f} (x)$ for any finite measurable partition of ${I_n}$ is, there is a network with at least 1 hidden layer (a finite number of weights) that can approximately approach the function [Universal_Approximation_Theorem, Universal_Approximators, Sigmoidal]. That is, let $C(\mathbb{R}^n,\mathbb{R}^m)$ denote the set of functions from a subset of a Euclidean $\mathbb{R}^n$ space to a Euclidean space $\mathbb{R}^m$   ( $n,m \in  \mathbb{N}$ ). Let $\varphi  \in C(\mathbb{R},\mathbb{R})$ , and $\varphi  \circ x$  denotes $\varphi$ applied to each component of *x*. For any $\varepsilon  > 0$  , *n*, *m*, and  $\varphi$ , there exist $k \in \mathbb{N}$ ,  $A \in {\mathbb{R}^{k \times n}}$  ,  $b \in {\mathbb{R}^k}$  ,  and $V \in {\mathbb{R}^{m \times k}}$ , such that
 
 $$\forall x \in {I_n}  ,  {\mathop{\rm F}\nolimits} (x) = V \cdot (\varphi  \circ (A \cdot x + b)) , \left| {{\mathop{\rm F}\nolimits} (x) - {\mathop{\rm f}\nolimits} (x)} \right| < \varepsilon $$
 
@@ -231,7 +287,7 @@ This type of algorithm is designed and realized by a series of operations based 
 
 Similarly, in a higher *n*-dimensional space, there still exist lines represented by the equation ${w_1}{x_1} + {w_2}{x_2} +  \cdots  + {w_n}{x_n} + b$ that can separate two classes of sample points, which are also known as hyperplanes. Expressing parameters ${w_1} \sim {w_n}$ and variables ${x_1} \sim {x_n}$ as vectors, the equation of the hyperplane can be simplified to $L:{w^T}X + b = 0$ . In this way, two-class samples ${X_i}$ and their labels ${y_i}$  ( $i \in [1,k]$ ) satisfy the following inequality.
 
-$$\left\{ {\begin{array}{*{20}{c}}
+$$\left\lbrace {\begin{array}{*{20}{c}}
 {{w^T}{X_i} + b \ge 1{\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {y_i} =  + 1}\\
 {{w^T}{X_i} + b \le  - 1{\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {y_i} =  - 1}
 \end{array}} \right.$$
@@ -264,9 +320,9 @@ Among them, ${N_t}$ is the number of samples in leaf nodes, i.e., the weight of 
 
 **Random forest (RF).** In order to address the issue of overfitting in decision trees, the random forest performs multiple bootstrap sampling on the input data, builds several CART decision trees, and finally synthesizes the results of these trees to make classification decisions. In this way, it can achieve more accurate judgments and avoid the impact of wrong decision conditions learned from a single tree. As proved in [RF], with the training sample size increases, the generalization error of random forests will converge, which can be considered the average distance between predicted and actual values. In Experiment 5 of the paper, we trained a random forest model based on the normal and reentrancy vulnerability contract training in Dataset_1. The below figure depicts a segment of the first CART decision tree in this random forest model. It can be seen that the logic representation of the decision tree is similar to the human-defined rules, which can automatically distinguish normal and malicious contracts by checking various feature dimensions based on contract instances. Furthermore, taking instances of the Dao vulnerability event contract in Experiment 7 as an example, through successive dimension judgments, we can identify two instances with reentrancy vulnerability features, i.e., “...SLOAD, ..., GAS, CALL, ..., SSTORE, ...”. However, other rule/logic-based detection methods (e.g., Mythril and SMARTIAN) missed them. Besides, when these features are not met, e.g., there is no GAS instruction before the CALL instruction (i.e., the TRANSFER operation) or no SSTORE instruction after it (i.e., the storage variable is not changed), the decision tree can accurately identify them as normal instances. Note that these rules generated by trees can help existing tools establish/repair their detection logic for new/existing vulnerability patterns and even formulate corresponding repair measures for vulnerabilities.
 
-<img src="Document_figures/RF.png" alt="img" style="zoom:30%;" />
+<img src="Document_figures/RF.png" alt="img" style="zoom:5%;" />
 
-**eXtreme Gradient Boosting (XGBoost).** XGBoost is also composed of multiple CART decision trees and can be used to handle classification and regression problems. Its final prediction result ${\hat y_i}$  is denoted as ${\hat y_i}{\rm{ = }}\sum\nolimits_{k = 1}^K {{f_k}({x_i})}$ , where *K* is the number of decision trees and ${f_k}$  represents a function (an abstract structure of trees) in the mapping space ${\cal F}$ . The objective function is defined as ${\mathop{\rm obj}\nolimits} (\theta ) = \sum\nolimits_{i = 1}^N {l({y_i},{{\hat y}_i})}  + \sum\nolimits_{i = 1}^K {\Omega ({f_k})}$  and $\Omega ({f_k}) = \gamma T + \frac{1}{2}\lambda \sum\nolimits_{j = 1}^T {w_j^w}$  . Among them, $l$  , $\Omega$  , $N$  , and  $T$ are the loss function (e.g., MSE), penalty term, number of samples, and number of leaf nodes, respectively. Notably, in addition to the interpretability of trees, this method still has a series of optimizations based on mathematical theory. For instance, compared with traditional Gradient Boosting algorithms, it utilizes the second-order Taylor expansion to combine the second derivative of the loss function with the first derivative, thereby approaching the optimal solution faster. Therefore, this method is sufficiently interpretable.
+**eXtreme Gradient Boosting (XGBoost).** XGBoost is also composed of multiple CART decision trees and can be used to handle classification and regression problems. Its final prediction result ${\hat y_i}$  is denoted as $`{\hat y_i}{\rm{ = }}\sum\nolimits_{k = 1}^K {{f_k}({x_i})}`$ , where *K* is the number of decision trees and ${f_k}$  represents a function (an abstract structure of trees) in the mapping space ${\cal F}$ . The objective function is defined as $`{\mathop{\rm obj}\nolimits} (\theta ) = \sum\nolimits_{i = 1}^N {l({y_i},{{\hat y}_i})}  + \sum\nolimits_{i = 1}^K {\Omega ({f_k})}$  and $\Omega ({f_k}) = \gamma T + \frac{1}{2}\lambda \sum\nolimits_{j = 1}^T {w_j^w}`$  . Among them, $l$ , $\Omega$ , $N$ , and  $T$ are the loss function (e.g., MSE), penalty term, number of samples, and number of leaf nodes, respectively. Notably, in addition to the interpretability of trees, this method still has a series of optimizations based on mathematical theory. For instance, compared with traditional Gradient Boosting algorithms, it utilizes the second-order Taylor expansion to combine the second derivative of the loss function with the first derivative, thereby approaching the optimal solution faster. Therefore, this method is sufficiently interpretable.
 
 ### Effectiveness evidence for detection framework
 
